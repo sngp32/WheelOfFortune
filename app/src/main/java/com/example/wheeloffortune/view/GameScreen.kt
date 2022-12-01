@@ -5,19 +5,23 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.wheeloffortune.controller.GameController
 
 @Composable
-fun StartScreen(navController: NavController) {
+fun GameScreen(navController: NavController) {
     Column() {
-        Text(text = "Welcome to the wheel of fortune!")
-        Text(text = "Press 'Start' to start the game")
+        Text(text = "The word is")
+        GameController.generateRandomWord()
+        Text(text = GameController.getDisplayedWord())
+        Text(text = "Spin the wheel!")
+        var wheelValue by remember { mutableStateOf("")}
         Button(
-            onClick = { navController.navigate("game") },
+            onClick = { wheelValue = GameController.spinWheel() },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color(
                     0xFF454545
@@ -25,7 +29,11 @@ fun StartScreen(navController: NavController) {
             ),
             modifier = Modifier.width(300.dp)
         ) {
-            Text(text = "Start", color = Color.White)
+            Text(text = "Spin", color = Color.White)
+        }
+
+        if (wheelValue.length>0) {
+            Text(text = "The wheel landed on "+wheelValue)
         }
     }
 }
