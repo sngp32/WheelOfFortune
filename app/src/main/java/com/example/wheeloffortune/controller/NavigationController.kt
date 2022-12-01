@@ -12,8 +12,9 @@ import com.example.wheeloffortune.view.StartScreen
 @Composable
     fun Navigation() {
         val navController = rememberNavController()
+        val gameController = GameController()
         NavHost(navController = navController, startDestination = "start") {
-            composable("start") { StartScreen(navController = navController) }
-            composable("game") { GameScreen(navController = navController) }
+            composable("start") { StartScreen(navController = navController, gameController) }
+            composable("game") { GameScreen(navController = navController, gameController) }
         }
     }

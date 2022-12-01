@@ -10,14 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.wheeloffortune.controller.GameController
 
 @Composable
-fun StartScreen(navController: NavController) {
+fun StartScreen(navController: NavController, gameController: GameController) {
     Column() {
         Text(text = "Welcome to the wheel of fortune!")
         Text(text = "Press 'Start' to start the game")
         Button(
-            onClick = { navController.navigate("game") },
+            onClick = { gameController.startGame()
+                        navController.navigate("game")},
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color(
                     0xFF454545
