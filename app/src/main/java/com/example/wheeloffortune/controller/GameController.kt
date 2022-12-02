@@ -3,6 +3,7 @@ package com.example.wheeloffortune.controller
 class GameController {
     private val wheelValues: List<String> =
         listOf("100", "200", "300", "400", "500", "600", "1000", "bankrupt")
+    // TODO - import words from list...
     private val words = listOf<String>(
         "explode",
         "seize",
