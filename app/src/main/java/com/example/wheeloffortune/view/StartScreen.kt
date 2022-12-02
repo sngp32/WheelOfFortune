@@ -31,12 +31,13 @@ fun StartScreen(navController: NavController, gameController: GameController) {
             textAlign = TextAlign.Center,
             color = Color.White
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(60.dp))
         Text(
             text = "Press 'Start' to start the game",
             textAlign = TextAlign.Center,
             fontSize = 18.sp,
         )
+        Spacer(modifier = Modifier.height(10.dp))
         Button(
             onClick = {
                 gameController.startGame()
@@ -47,7 +48,7 @@ fun StartScreen(navController: NavController, gameController: GameController) {
                     0xFF454545
                 )
             ),
-            modifier = Modifier.width(300.dp)
+            modifier = Modifier.width(300.dp).height(60.dp)
         ) {
             Text(text = "Start", color = Color.White)
         }

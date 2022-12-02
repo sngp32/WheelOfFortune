@@ -33,10 +33,11 @@ fun GameScreen(navController: NavController, gameController: GameController) {
         var randomWord by remember { mutableStateOf(gameController.getDisplayedWord()) }
         Text(text = randomWord, fontSize = 38.sp)
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         if (gameController.getMissingChars() != 0 && gameController.getLives() != 0) {
             var spinText by remember { mutableStateOf("Spin the wheel!") }
             Text(text = spinText)
+            Spacer(modifier = Modifier.height(20.dp))
             var wheelValue by remember { mutableStateOf("") }
             var spinEnabled by remember { mutableStateOf(true) }
             Button(
@@ -50,7 +51,7 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                         0xFF454545
                     )
                 ),
-                modifier = Modifier.width(300.dp),
+                modifier = Modifier.width(300.dp).height(50.dp),
                 enabled = spinEnabled
             ) {
                 Text(text = "Spin", color = Color.White)
@@ -59,7 +60,7 @@ fun GameScreen(navController: NavController, gameController: GameController) {
             if (wheelValue.length > 0) {
                 Text(text = "The wheel landed on " + wheelValue)
                 if (wheelValue == "bankrupt") {
-                    Text(text = "and you lost all your money :( ")
+                    Text(text = "and you lost all your points :( ")
                 } else {
                     var character: MutableState<String> = remember { mutableStateOf("") }
 
@@ -91,7 +92,7 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                                     0xFF454545
                                 )
                             ),
-                            modifier = Modifier.width(300.dp)
+                            modifier = Modifier.width(300.dp).height(50.dp)
                         ) {
                             Text(text = "Check character", color = Color.White)
                         }
@@ -118,7 +119,7 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                             0xFF454545
                         )
                     ),
-                    modifier = Modifier.width(300.dp)
+                    modifier = Modifier.width(300.dp).height(60.dp)
                 ) {
                     Text(text = "Close game", color = Color.White)
                 }
