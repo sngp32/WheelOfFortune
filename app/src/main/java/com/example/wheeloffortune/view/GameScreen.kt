@@ -21,11 +21,16 @@ fun GameScreen(navController: NavController, gameController: GameController) {
             .background(Color(0xff06aa61)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        // The player stats
         Spacer(modifier = Modifier.height(20.dp))
         var lives by remember { mutableStateOf(gameController.getLives()) }
         Text(text = "Your lives: " + lives)
         var points by remember { mutableStateOf(gameController.getPoints()) }
         Text(text = "Your points: " + points)
+
+
+        // The displayed word
         Text(
             text = "The word is", fontSize = 38.sp,
             color = Color.White
@@ -33,8 +38,11 @@ fun GameScreen(navController: NavController, gameController: GameController) {
         var randomWord by remember { mutableStateOf(gameController.getDisplayedWord()) }
         Text(text = randomWord, fontSize = 38.sp)
 
+
         Spacer(modifier = Modifier.height(40.dp))
         if (gameController.getMissingChars() != 0 && gameController.getLives() != 0) {
+
+            // The "wheel spinner"
             var spinText by remember { mutableStateOf("Spin the wheel!") }
             Text(text = spinText)
             Spacer(modifier = Modifier.height(20.dp))
@@ -51,19 +59,23 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                         0xFF454545
                     )
                 ),
-                modifier = Modifier.width(300.dp).height(50.dp),
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(50.dp),
                 enabled = spinEnabled
             ) {
                 Text(text = "Spin", color = Color.White)
             }
 
             if (wheelValue.length > 0) {
+                // Showing the wheel results
                 Text(text = "The wheel landed on " + wheelValue)
                 if (wheelValue == "bankrupt") {
                     Text(text = "and you lost all your points :( ")
                 } else {
-                    var character: MutableState<String> = remember { mutableStateOf("") }
 
+                    // The user can input a character
+                    var character: MutableState<String> = remember { mutableStateOf("") }
                     OutlinedTextField(
                         value = character.value,
                         onValueChange = { input -> character.value = input },
@@ -73,16 +85,19 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                             backgroundColor = Color.White
                         )
                     )
+                    // Only accept 1 character
                     if (character.value.length == 1) {
                         Button(
                             onClick = {
                                 if (gameController.checkChar(character.value[0]) == 0) {
+                                    // The user guessed wrong
                                     wheelValue = ""
                                     spinText = "You guessed wrong and lost a life.. Spin again!"
                                     spinEnabled = true
                                 } else {
                                     spinText = "Spin the wheel!"
                                 }
+                                // Update user stats
                                 points = gameController.getPoints()
                                 lives = gameController.getLives()
                                 randomWord = gameController.getDisplayedWord()
@@ -92,7 +107,9 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                                     0xFF454545
                                 )
                             ),
-                            modifier = Modifier.width(300.dp).height(50.dp)
+                            modifier = Modifier
+                                .width(300.dp)
+                                .height(50.dp)
                         ) {
                             Text(text = "Check character", color = Color.White)
                         }
@@ -101,8 +118,11 @@ fun GameScreen(navController: NavController, gameController: GameController) {
             }
 
         }
+
+        // Check if game is over
         if (gameController.getLives() < 1 || gameController.getMissingChars() == 0) {
             randomWord = gameController.getRandomWord()
+            // Show end stats
             Column {
                 Text(text = "Game Over")
                 Text(text = "Points: " + points)
@@ -119,7 +139,9 @@ fun GameScreen(navController: NavController, gameController: GameController) {
                             0xFF454545
                         )
                     ),
-                    modifier = Modifier.width(300.dp).height(60.dp)
+                    modifier = Modifier
+                        .width(300.dp)
+                        .height(60.dp)
                 ) {
                     Text(text = "Close game", color = Color.White)
                 }

@@ -7,7 +7,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.wheeloffortune.view.GameScreen
 import com.example.wheeloffortune.view.StartScreen
 
-
+/**
+ * This is where the navigation of the application is controlled
+ */
 @Composable
 fun Navigation() {
     val navController = rememberNavController()

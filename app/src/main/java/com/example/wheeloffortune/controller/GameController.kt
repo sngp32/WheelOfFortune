@@ -3,6 +3,7 @@ package com.example.wheeloffortune.controller
 class GameController {
     private val wheelValues: List<String> =
         listOf("100", "200", "300", "400", "500", "600", "1000", "bankrupt")
+
     // TODO - import words from list...
     private val words = listOf<String>(
         "explode",
@@ -42,6 +43,9 @@ class GameController {
     private var points = 0
     private var missingChars = 0
 
+    /**
+     * Resets variables when game starts/restarts
+     */
     fun startGame() {
         lives = 5
         points = 0
@@ -49,6 +53,10 @@ class GameController {
         generateRandomWord()
     }
 
+    /**
+     * Finds a random word from the word list, and make a corresponding "hidden" word consisting
+     * of '*' which is shown to the user
+     */
     fun generateRandomWord(): String {
         val map = mutableMapOf<Char, Char>()
         missingChars = 0
@@ -62,6 +70,9 @@ class GameController {
         return randomWord
     }
 
+    /**
+     * Returns the word to be displayed for the user
+     */
     fun getDisplayedWord(): String {
         return displayedWord
     }
@@ -82,6 +93,10 @@ class GameController {
         return points
     }
 
+    /**
+     * Checks whether the user guessed right or wrong, and then adds the right amount of points
+     * to the user.
+     */
     fun checkChar(char: Char): Int {
         var multiplier: Int = 0
         var charArray = displayedWord.toCharArray()

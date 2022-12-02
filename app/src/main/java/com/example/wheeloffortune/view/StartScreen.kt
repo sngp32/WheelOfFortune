@@ -48,7 +48,9 @@ fun StartScreen(navController: NavController, gameController: GameController) {
                     0xFF454545
                 )
             ),
-            modifier = Modifier.width(300.dp).height(60.dp)
+            modifier = Modifier
+                .width(300.dp)
+                .height(60.dp)
         ) {
             Text(text = "Start", color = Color.White)
         }
